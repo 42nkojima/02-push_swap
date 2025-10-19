@@ -1,0 +1,6 @@
+**.o
+.DS_Store
+**.pdf
+
+/lib
+push_swap
