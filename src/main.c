@@ -6,7 +6,7 @@
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 11:12:59 by nkojima           #+#    #+#             */
-/*   Updated: 2025/10/23 20:35:38 by nkojima          ###   ########.fr       */
+/*   Updated: 2025/10/23 20:54:07 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	**create_tokens(int ac, char **av)
 
 	tokens = ft_split(joined, ' ');
 	free(joined);
-	if (!temp)
+	if (!tokens)
 		return (NULL);
 	return (tokens);
 }
@@ -87,6 +87,40 @@ int is_valid_number(char *str)
 	return (1);
 }
 
+int str_to_int(const char *str, int  *result)
+{
+	long num;
+	int sign;
+	int i;
+
+	num = 0;
+	sign = 1;
+	i = 0;
+
+	if (str[i] == '-')
+	{
+		sign = -1;
+		i++;
+	}
+	else if (str[i] == '+')
+		i++;
+
+	while (str[i])
+	{
+		num = num * 10 + (str[i] - '0');
+
+		if (sign == 1 && num > INT_MAX)
+			return (0);
+		if (sign == -1 && -num < INT_MIN)
+			return (0);
+
+		i++;
+	}
+
+	*result = (int)(sign * num);
+	return (1);
+}
+
 int	main(int ac, char **av)
 {
 	char	**tokens;
@@ -119,6 +153,14 @@ int	main(int ac, char **av)
 	while (tokens[i])
 	{
 		if (!is_valid_number(tokens[i]))
+		{
+			free_tokens(tokens);
+			free(numbers);
+			ft_putstr_fd("Error\n", 2);
+			exit(1);
+		}
+
+		if (!str_to_int(tokens[i], &numbers[i]))
 		{
 			free_tokens(tokens);
 			free(numbers);
