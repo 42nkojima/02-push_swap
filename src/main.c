@@ -141,6 +141,20 @@ int has_duplicate(int *numbers, int count)
 	return (0);
 }
 
+int is_sorted(int *numbers, int count)
+{
+	int i;
+
+	i = 0;
+	while (i < count - 1)
+	{
+		if (numbers[i] > numbers[i + 1])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int	main(int ac, char **av)
 {
 	char	**tokens;
@@ -199,6 +213,13 @@ int	main(int ac, char **av)
 	}
 
 	free_tokens(tokens);
+
+	if (is_sorted(numbers, count))
+	{
+		free(numbers);
+		return (0);
+	}
+
 	free(numbers);
 	return (0);
 }
