@@ -6,7 +6,7 @@
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 11:12:59 by nkojima           #+#    #+#             */
-/*   Updated: 2025/10/23 20:54:07 by nkojima          ###   ########.fr       */
+/*   Updated: 2025/11/08 01:37:56 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,26 @@ int str_to_int(const char *str, int  *result)
 	return (1);
 }
 
+int has_duplicate(int *numbers, int count)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < count)
+	{
+		j = i + 1;
+		while (j < count)
+		{
+			if (numbers[i] == numbers[j])
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
 	char	**tokens;
@@ -168,6 +188,14 @@ int	main(int ac, char **av)
 			exit(1);
 		}
 		i++;
+	}
+
+	if (has_duplicate(numbers, count))
+	{
+		free_tokens(tokens);
+		free(numbers);
+		ft_putstr_fd("Error\n", 2);
+		exit(1);
 	}
 
 	free_tokens(tokens);
