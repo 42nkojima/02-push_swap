@@ -6,7 +6,7 @@
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 11:12:59 by nkojima           #+#    #+#             */
-/*   Updated: 2025/11/08 18:11:16 by nkojima          ###   ########.fr       */
+/*   Updated: 2025/11/08 21:47:38 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,7 +219,8 @@ int	main(int ac, char **av)
 		i++;
 	}
 	free(numbers);
-	// TODO: ソートアルゴリズムをここに実装する
+	if (stack_a->size == 2)
+		sort_two(stack_a);
 	free_stack(stack_a);
 	free_stack(stack_b);
 	return (0);
