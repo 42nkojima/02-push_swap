@@ -45,10 +45,12 @@ void	rrr(t_stack *a, t_stack *b);
 
 t_stack	*init_stack(void);
 void	push_back(t_stack *stack, int value);
+void	print_stack(t_stack *stack, char *name);
 void	free_stack(t_stack *stack);
 
 void	sort_two(t_stack *a);
 void	sort_three(t_stack *a);
 void	sort_four(t_stack *a, t_stack *b);
+void	sort_five(t_stack *a, t_stack *b);
 
 #endif

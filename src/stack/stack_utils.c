@@ -49,6 +49,22 @@ void	push_back(t_stack *stack, int value)
 	stack->size++;
 }
 
+void	print_stack(t_stack *stack, char *name)
+{
+	t_node	*current;
+
+	if (!stack)
+		return ;
+	ft_printf("Stack %s: ", name);
+	current = stack->top;
+	while (current)
+	{
+		ft_printf("%d ", current->value);
+		current = current->next;
+	}
+	ft_printf("\n");
+}
+
 void	free_stack(t_stack *stack)
 {
 	t_node	*current;

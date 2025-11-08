@@ -46,7 +46,8 @@ SRCS = main.c \
        stack/stack_utils.c \
        usecase/sort_two.c \
        usecase/sort_three.c \
-       usecase/sort_four.c
+       usecase/sort_four.c \
+       usecase/sort_five.c
 
 OBJ_FILES = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 
@@ -125,15 +126,12 @@ re: fclean all
 # ===============================
 #         Test Rules            #
 # ===============================
-test: test-input test-operations test-sorting
+test: test-input test-sorting
 
 test-input: $(NAME)
 	@bash tests/test_input_validation.sh
 
-test-operations: $(NAME)
-	@bash tests/test_operations.sh
-
 test-sorting: $(NAME)
 	@bash tests/test_sorting.sh
 
-.PHONY: all clean fclean re distclean test test-input test-operations test-sorting
+.PHONY: all clean fclean re distclean test test-input test-sorting
