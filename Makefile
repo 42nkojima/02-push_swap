@@ -6,7 +6,7 @@
 #    By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/18 19:32:33 by nkojima           #+#    #+#              #
-#    Updated: 2025/10/19 11:12:03 by nkojima          ###   ########.fr        #
+#    Updated: 2025/11/08 17:06:38 by nkojima          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -113,4 +113,18 @@ distclean: fclean
 
 re: fclean all
 
-.PHONY: all clean fclean re distclean
+# ===============================
+#         Test Rules            #
+# ===============================
+test: test-input test-operations test-sorting
+
+test-input: $(NAME)
+	@bash tests/test_input_validation.sh
+
+test-operations: $(NAME)
+	@bash tests/test_operations.sh
+
+test-sorting: $(NAME)
+	@bash tests/test_sorting.sh
+
+.PHONY: all clean fclean re distclean test test-input test-operations test-sorting
