@@ -45,7 +45,8 @@ SRCS = main.c \
        operations/reverse_rotate.c \
        stack/stack_utils.c \
        usecase/sort_two.c \
-       usecase/sort_three.c
+       usecase/sort_three.c \
+       usecase/sort_four.c
 
 OBJ_FILES = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 

@@ -223,6 +223,8 @@ int	main(int ac, char **av)
 		sort_two(stack_a);
 	else if (stack_a->size == 3)
 		sort_three(stack_a);
+	else if (stack_a->size == 4)
+		sort_four(stack_a, stack_b);
 	free_stack(stack_a);
 	free_stack(stack_b);
 	return (0);

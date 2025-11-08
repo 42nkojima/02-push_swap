@@ -49,5 +49,6 @@ void	free_stack(t_stack *stack);
 
 void	sort_two(t_stack *a);
 void	sort_three(t_stack *a);
+void	sort_four(t_stack *a, t_stack *b);
 
 #endif
