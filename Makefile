@@ -6,7 +6,7 @@
 #    By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/18 19:32:33 by nkojima           #+#    #+#              #
-#    Updated: 2025/11/08 17:06:38 by nkojima          ###   ########.fr        #
+#    Updated: 2025/11/08 18:05:53 by nkojima          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,13 @@ INCLUDE_DIR = include
 # ===============================
 #         Source Files          #
 # ===============================
-SRCS = main.c
+SRCS = main.c \
+       operations/swap.c \
+       operations/push.c \
+       operations/rotate.c \
+       operations/reverse_rotate.c \
+       stack/stack_utils.c
+
 OBJ_FILES = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 
 # ===============================
@@ -58,7 +64,7 @@ $(NAME): $(OBJ_FILES) $(LIBFT) $(PRINTF)
 	@echo "$(NAME): $(YELLOW)$(NAME)$(RESET) $(GREEN)was created$(RESET)"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(LIBFT) $(PRINTF)
-	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -I$(INCLUDE_DIR) -I$(LIBFT_PATH) -I$(PRINTF_PATH)/include -c -o $@ $<
 	@echo "$(NAME): $(YELLOW)$@$(RESET) $(GREEN)was created$(RESET)"
 

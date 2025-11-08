@@ -6,7 +6,7 @@
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 11:12:59 by nkojima           #+#    #+#             */
-/*   Updated: 2025/11/08 01:37:56 by nkojima          ###   ########.fr       */
+/*   Updated: 2025/11/08 18:11:16 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,14 @@
 
 char	**create_tokens(int ac, char **av)
 {
-	char **tokens;
+	char	**tokens;
 	char	*joined;
-	char *temp;
-	int i;
+	char	*temp;
+	int		i;
 
 	joined = ft_strdup("");
 	if (!joined)
 		return (NULL);
-
 	i = 1;
 	while (i < ac)
 	{
@@ -31,7 +30,6 @@ char	**create_tokens(int ac, char **av)
 		if (!temp)
 			return (NULL);
 		joined = temp;
-
 		if (i < ac - 1)
 		{
 			temp = ft_strjoin(joined, " ");
@@ -42,7 +40,6 @@ char	**create_tokens(int ac, char **av)
 		}
 		i++;
 	}
-
 	tokens = ft_split(joined, ' ');
 	free(joined);
 	if (!tokens)
@@ -50,13 +47,12 @@ char	**create_tokens(int ac, char **av)
 	return (tokens);
 }
 
-void free_tokens(char **tokens)
+void	free_tokens(char **tokens)
 {
-	int i;
+	int	i;
 
 	if (!tokens)
-		return;
-
+		return ;
 	i = 0;
 	while (tokens[i])
 	{
@@ -66,37 +62,33 @@ void free_tokens(char **tokens)
 	free(tokens);
 }
 
-int is_valid_number(char *str)
+int	is_valid_number(char *str)
 {
-	int i;
-	i = 0;
+	int	i;
 
+	i = 0;
 	if (str[i] == '+' || str[i] == '-')
 		i++;
-
 	if (str[i] == '\0')
 		return (0);
-
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))
 			return (0);
 		i++;
 	}
-
 	return (1);
 }
 
-int str_to_int(const char *str, int  *result)
+int	str_to_int(const char *str, int *result)
 {
-	long num;
-	int sign;
-	int i;
+	long	num;
+	int		sign;
+	int		i;
 
 	num = 0;
 	sign = 1;
 	i = 0;
-
 	if (str[i] == '-')
 	{
 		sign = -1;
@@ -104,27 +96,23 @@ int str_to_int(const char *str, int  *result)
 	}
 	else if (str[i] == '+')
 		i++;
-
 	while (str[i])
 	{
 		num = num * 10 + (str[i] - '0');
-
 		if (sign == 1 && num > INT_MAX)
 			return (0);
 		if (sign == -1 && -num < INT_MIN)
 			return (0);
-
 		i++;
 	}
-
 	*result = (int)(sign * num);
 	return (1);
 }
 
-int has_duplicate(int *numbers, int count)
+int	has_duplicate(int *numbers, int count)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < count)
@@ -141,9 +129,9 @@ int has_duplicate(int *numbers, int count)
 	return (0);
 }
 
-int is_sorted(int *numbers, int count)
+int	is_sorted(int *numbers, int count)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < count - 1)
@@ -158,9 +146,11 @@ int is_sorted(int *numbers, int count)
 int	main(int ac, char **av)
 {
 	char	**tokens;
-	int i;
-	int count;
-	int *numbers;
+	int		i;
+	int		count;
+	int		*numbers;
+	t_stack	*stack_a;
+	t_stack	*stack_b;
 
 	if (ac == 1)
 		return (0);
@@ -170,11 +160,9 @@ int	main(int ac, char **av)
 		free_tokens(tokens);
 		return (0);
 	}
-
 	count = 0;
 	while (tokens[count])
 		count++;
-
 	numbers = malloc(sizeof(int) * count);
 	if (!numbers)
 	{
@@ -182,7 +170,6 @@ int	main(int ac, char **av)
 		ft_putstr_fd("Error\n", 2);
 		exit(1);
 	}
-
 	i = 0;
 	while (tokens[i])
 	{
@@ -193,7 +180,6 @@ int	main(int ac, char **av)
 			ft_putstr_fd("Error\n", 2);
 			exit(1);
 		}
-
 		if (!str_to_int(tokens[i], &numbers[i]))
 		{
 			free_tokens(tokens);
@@ -203,7 +189,6 @@ int	main(int ac, char **av)
 		}
 		i++;
 	}
-
 	if (has_duplicate(numbers, count))
 	{
 		free_tokens(tokens);
@@ -211,15 +196,31 @@ int	main(int ac, char **av)
 		ft_putstr_fd("Error\n", 2);
 		exit(1);
 	}
-
 	free_tokens(tokens);
-
 	if (is_sorted(numbers, count))
 	{
 		free(numbers);
 		return (0);
 	}
-
+	stack_a = init_stack();
+	stack_b = init_stack();
+	if (!stack_a || !stack_b)
+	{
+		free(numbers);
+		free_stack(stack_a);
+		free_stack(stack_b);
+		ft_putstr_fd("Error\n", 2);
+		exit(1);
+	}
+	i = 0;
+	while (i < count)
+	{
+		push_back(stack_a, numbers[i]);
+		i++;
+	}
 	free(numbers);
+	// TODO: ソートアルゴリズムをここに実装する
+	free_stack(stack_a);
+	free_stack(stack_b);
 	return (0);
 }
