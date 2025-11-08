@@ -6,7 +6,7 @@
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 11:12:59 by nkojima           #+#    #+#             */
-/*   Updated: 2025/11/08 21:47:38 by nkojima          ###   ########.fr       */
+/*   Updated: 2025/11/08 22:14:18 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,6 +221,8 @@ int	main(int ac, char **av)
 	free(numbers);
 	if (stack_a->size == 2)
 		sort_two(stack_a);
+	else if (stack_a->size == 3)
+		sort_three(stack_a);
 	free_stack(stack_a);
 	free_stack(stack_b);
 	return (0);

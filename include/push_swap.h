@@ -48,5 +48,6 @@ void	push_back(t_stack *stack, int value);
 void	free_stack(t_stack *stack);
 
 void	sort_two(t_stack *a);
+void	sort_three(t_stack *a);
 
 #endif
