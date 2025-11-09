@@ -6,7 +6,7 @@
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 11:13:32 by nkojima           #+#    #+#             */
-/*   Updated: 2025/11/08 21:46:17 by nkojima          ###   ########.fr       */
+/*   Updated: 2025/11/09 13:21:01 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	rrr(t_stack *a, t_stack *b);
 
 t_stack	*init_stack(void);
 void	push_back(t_stack *stack, int value);
-void	print_stack(t_stack *stack, char *name);
 void	free_stack(t_stack *stack);
 
 void	sort_two(t_stack *a);

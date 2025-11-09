@@ -6,7 +6,7 @@
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 00:00:00 by nkojima           #+#    #+#             */
-/*   Updated: 2025/11/08 18:10:21 by nkojima          ###   ########.fr       */
+/*   Updated: 2025/11/09 13:21:43 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,22 +47,6 @@ void	push_back(t_stack *stack, int value)
 		current->next = new_node;
 	}
 	stack->size++;
-}
-
-void	print_stack(t_stack *stack, char *name)
-{
-	t_node	*current;
-
-	if (!stack)
-		return ;
-	ft_printf("Stack %s: ", name);
-	current = stack->top;
-	while (current)
-	{
-		ft_printf("%d ", current->value);
-		current = current->next;
-	}
-	ft_printf("\n");
 }
 
 void	free_stack(t_stack *stack)
