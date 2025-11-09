@@ -24,6 +24,9 @@ void	sort_three(t_stack *a);
 void	sort_four(t_stack *a, t_stack *b);
 void	sort_five(t_stack *a, t_stack *b);
 
+/* Large sorting algorithms */
+void	sort_radix(t_stack *a, t_stack *b);
+
 /* Sort utilities */
 int		find_min_position(t_stack *a);
 int		find_max_position(t_stack *a);

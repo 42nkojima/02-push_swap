@@ -6,7 +6,7 @@
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 00:00:00 by nkojima           #+#    #+#             */
-/*   Updated: 2025/11/10 00:00:00 by nkojima          ###   ########.fr       */
+/*   Updated: 2025/11/10 03:22:46 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,7 @@ int	solve_push_swap(t_stacks *stacks)
 		sort_four(stacks->stack_a, stacks->stack_b);
 	else if (stacks->stack_a->size == 5)
 		sort_five(stacks->stack_a, stacks->stack_b);
+	else if (stacks->stack_a->size >= 6)
+		sort_radix(stacks->stack_a, stacks->stack_b);
 	return (1);
 }

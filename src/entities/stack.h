@@ -6,7 +6,7 @@
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 00:00:00 by nkojima           #+#    #+#             */
-/*   Updated: 2025/11/10 01:24:35 by nkojima          ###   ########.fr       */
+/*   Updated: 2025/11/10 03:20:08 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 typedef struct s_node
 {
 	int				value;
+	int				rank;
 	struct s_node	*next;
 }	t_node;
 

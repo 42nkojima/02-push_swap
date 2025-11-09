@@ -6,7 +6,7 @@
 #    By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/18 19:32:33 by nkojima           #+#    #+#              #
-#    Updated: 2025/11/10 01:38:09 by nkojima          ###   ########.fr        #
+#    Updated: 2025/11/10 03:12:37 by nkojima          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ SRCS =  main.c \
 		interfaces/operations/reverse_rotate_operations.c \
 		usecases/sort_utils.c \
 		usecases/sort_small.c \
+		usecases/sort_large.c \
 		usecases/solve_push_swap.c
 
 OBJ_FILES = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
