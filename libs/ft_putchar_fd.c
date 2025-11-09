@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/19 11:12:59 by nkojima           #+#    #+#             */
-/*   Updated: 2025/11/09 13:40:00 by nkojima          ###   ########.fr       */
+/*   Created: 2025/11/10 01:01:21 by nkojima           #+#    #+#             */
+/*   Updated: 2025/11/10 01:01:22 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "interfaces/input/input.h"
-#include "usecases/solver.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+void	ft_putchar_fd(char c, int fd)
 {
-	t_stacks	*stacks;
-
-	stacks = parse_input(ac, av);
-	if (!stacks)
-		return (0);
-	if (!solve_push_swap(stacks))
-	{
-		free_stacks(stacks);
-		return (1);
-	}
-	free_stacks(stacks);
-	return (0);
+	write(fd, &c, 1);
 }

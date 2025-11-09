@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/19 11:12:59 by nkojima           #+#    #+#             */
-/*   Updated: 2025/11/09 13:40:00 by nkojima          ###   ########.fr       */
+/*   Created: 2025/11/10 01:02:32 by nkojima           #+#    #+#             */
+/*   Updated: 2025/11/10 01:22:49 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "interfaces/input/input.h"
-#include "usecases/solver.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+size_t	ft_strlen(const char *str)
 {
-	t_stacks	*stacks;
+	size_t	len;
 
-	stacks = parse_input(ac, av);
-	if (!stacks)
-		return (0);
-	if (!solve_push_swap(stacks))
-	{
-		free_stacks(stacks);
-		return (1);
-	}
-	free_stacks(stacks);
-	return (0);
+	len = 0;
+	while (str[len])
+		len++;
+	return (len);
 }

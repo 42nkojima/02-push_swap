@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_two.c                                         :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/08 00:00:00 by nkojima           #+#    #+#             */
-/*   Updated: 2025/11/08 00:00:00 by nkojima          ###   ########.fr       */
+/*   Created: 2025/11/10 01:02:12 by nkojima           #+#    #+#             */
+/*   Updated: 2025/11/10 01:22:59 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	sort_two(t_stack *a)
+char	*ft_strdup(const char *str)
 {
-	if (!a || a->size < 2)
-		return ;
-	if (a->top->value > a->top->next->value)
-		sa(a);
+	size_t	str_len;
+	char	*ptr;
+
+	str_len = ft_strlen(str);
+	ptr = malloc(str_len + 1);
+	if (!ptr)
+		return (NULL);
+	ft_memcpy(ptr, str, str_len + 1);
+	return (ptr);
 }

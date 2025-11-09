@@ -6,7 +6,7 @@
 #    By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/18 19:32:33 by nkojima           #+#    #+#              #
-#    Updated: 2025/11/08 21:46:28 by nkojima          ###   ########.fr        #
+#    Updated: 2025/11/10 01:38:09 by nkojima          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,98 +27,80 @@ CFLAGS = -Wall -Werror -Wextra -O2
 # ===============================
 #         Directory Paths       #
 # ===============================
-LIB_DIR = lib
-LIBFT_PATH = $(LIB_DIR)/libft
-PRINTF_PATH = $(LIB_DIR)/ft_printf
+LIBS_DIR = libs
 
 SRC_DIR = src
 OBJ_DIR = obj
-INCLUDE_DIR = include
 
 # ===============================
 #         Source Files          #
 # ===============================
-SRCS = main.c \
-       operations/swap.c \
-       operations/push.c \
-       operations/rotate.c \
-       operations/reverse_rotate.c \
-       stack/stack_utils.c \
-       usecase/sort_two.c \
-       usecase/sort_three.c \
-       usecase/sort_four.c \
-       usecase/sort_five.c
+SRCS =  main.c \
+		debug_utils.c \
+		entities/stack.c \
+		entities/stack_operations.c \
+		interfaces/input/input_tokenizer.c \
+		interfaces/input/input_validator.c \
+		interfaces/input/input_number_parser.c \
+		interfaces/input/input_parser.c \
+		interfaces/operations/swap_operations.c \
+		interfaces/operations/push_operations.c \
+		interfaces/operations/rotate_operations.c \
+		interfaces/operations/reverse_rotate_operations.c \
+		usecases/sort_utils.c \
+		usecases/sort_small.c \
+		usecases/solve_push_swap.c
 
 OBJ_FILES = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 
 # ===============================
 #            Libraries          #
 # ===============================
-LIBFT = $(LIBFT_PATH)/libft.a
-PRINTF = $(PRINTF_PATH)/ft_printf.a
+LIBS_SRCS = ft_isdigit.c \
+            ft_memcpy.c \
+            ft_putchar_fd.c \
+            ft_putnbr_fd.c \
+            ft_putstr_fd.c \
+            ft_split.c \
+            ft_strdup.c \
+            ft_strjoin.c \
+            ft_strlen.c
+
+LIBS_OBJ_FILES = $(addprefix $(OBJ_DIR)/libs/, $(LIBS_SRCS:.c=.o))
 
 # ===============================
 #         Build Rules           #
 # ===============================
 all: $(NAME)
 
-$(NAME): $(OBJ_FILES) $(LIBFT) $(PRINTF)
-	@$(CC) $(CFLAGS) -o $@ $(OBJ_FILES) -L$(LIBFT_PATH) -lft -L$(PRINTF_PATH) -lftprintf
+$(NAME): $(OBJ_FILES) $(LIBS_OBJ_FILES)
+	@$(CC) $(CFLAGS) -o $@ $(OBJ_FILES) $(LIBS_OBJ_FILES)
 	@echo "$(NAME): $(GREEN)object files were created $(RESET)"
 	@echo "$(NAME): $(YELLOW)$(NAME)$(RESET) $(GREEN)was created$(RESET)"
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(LIBFT) $(PRINTF)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -I$(INCLUDE_DIR) -I$(LIBFT_PATH) -I$(PRINTF_PATH)/include -c -o $@ $<
+	@$(CC) $(CFLAGS) -I$(SRC_DIR) -I$(LIBS_DIR) -c -o $@ $<
 	@echo "$(NAME): $(YELLOW)$@$(RESET) $(GREEN)was created$(RESET)"
 
-# ===============================
-#       Library Dependencies    #
-# ===============================
-$(LIBFT): | $(LIBFT_PATH)
-	@$(MAKE) -C $(LIBFT_PATH)
-	@echo "$(NAME): $(YELLOW)$(LIBFT)$(RESET) $(GREEN)was created$(RESET)"
-
-$(LIBFT_PATH):
-	@git clone git@github.com:42nkojima/00-libft.git $(LIBFT_PATH)
-	@echo "$(NAME): $(YELLOW)$(LIBFT_PATH)$(RESET) $(GREEN)was cloned$(RESET)"
-
-$(PRINTF): | $(PRINTF_PATH)
-	@$(MAKE) -C $(PRINTF_PATH)
-	@echo "$(NAME): $(YELLOW)$(PRINTF)$(RESET) $(GREEN)was created$(RESET)"
-
-$(PRINTF_PATH):
-	@git clone git@github.com:42nkojima/01-ft_printf.git $(PRINTF_PATH)
-	@echo "$(NAME): $(YELLOW)$(PRINTF_PATH)$(RESET) $(GREEN)was cloned$(RESET)"
+$(OBJ_DIR)/$(LIBS_DIR)/%.o: $(LIBS_DIR)/%.c
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -I$(LIBS_DIR) -c -o $@ $<
+	@echo "$(NAME): $(YELLOW)$@$(RESET) $(GREEN)was created$(RESET)"
 
 # ===============================
 #         Clean Rules           #
 # ===============================
 clean:
-	@if [ -d $(LIBFT_PATH) ]; then $(MAKE) -C $(LIBFT_PATH) clean; fi
-	@if [ -d $(PRINTF_PATH) ]; then $(MAKE) -C $(PRINTF_PATH) clean; fi
 	@if [ -d $(OBJ_DIR) ]; then \
 		rm -rf $(OBJ_DIR); \
 		echo "$(NAME): $(YELLOW)$(OBJ_DIR)$(RESET) $(RED)was deleted$(RESET)"; \
 	fi
 
 fclean: clean
-	@if [ -d $(LIBFT_PATH) ]; then $(MAKE) -C $(LIBFT_PATH) fclean; fi
-	@if [ -d $(PRINTF_PATH) ]; then $(MAKE) -C $(PRINTF_PATH) fclean; fi
 	@if [ -f $(NAME) ]; then \
 		rm -f $(NAME); \
 		echo "$(NAME): $(YELLOW)$(NAME)$(RESET) $(RED)was deleted$(RESET)"; \
-	fi
-
-# Include libraries in clean
-distclean: fclean
-	@if [ -d $(LIBFT_PATH) ]; then \
-		rm -rf $(LIBFT_PATH); \
-		echo "$(NAME): $(YELLOW)$(LIBFT_PATH)$(RESET) $(RED)was deleted$(RESET)"; \
-	fi
-	@if [ -d $(PRINTF_PATH) ]; then \
-		rm -rf $(PRINTF_PATH); \
-		echo "$(NAME): $(YELLOW)$(PRINTF_PATH)$(RESET) $(RED)was deleted$(RESET)"; \
 	fi
 
 re: fclean all
@@ -134,4 +116,4 @@ test-input: $(NAME)
 test-sorting: $(NAME)
 	@bash tests/test_sorting.sh
 
-.PHONY: all clean fclean re distclean test test-input test-sorting
+.PHONY: all clean fclean re test test-input test-sorting

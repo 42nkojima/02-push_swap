@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   debug_utils.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/19 11:12:59 by nkojima           #+#    #+#             */
-/*   Updated: 2025/11/09 13:40:00 by nkojima          ###   ########.fr       */
+/*   Created: 2025/11/10 00:00:00 by nkojima           #+#    #+#             */
+/*   Updated: 2025/11/10 00:00:00 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "interfaces/input/input.h"
-#include "usecases/solver.h"
+#ifndef DEBUG_UTILS_H
+# define DEBUG_UTILS_H
 
-int	main(int ac, char **av)
-{
-	t_stacks	*stacks;
+# include "entities/stack.h"
 
-	stacks = parse_input(ac, av);
-	if (!stacks)
-		return (0);
-	if (!solve_push_swap(stacks))
-	{
-		free_stacks(stacks);
-		return (1);
-	}
-	free_stacks(stacks);
-	return (0);
-}
+void	print_stack(t_stack *stack, char *name);
+void	print_both_stacks(t_stack *stack_a, t_stack *stack_b);
+
+#endif

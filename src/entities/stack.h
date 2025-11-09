@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   stack.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/19 11:13:32 by nkojima           #+#    #+#             */
-/*   Updated: 2025/11/09 13:21:01 by nkojima          ###   ########.fr       */
+/*   Created: 2025/11/09 00:00:00 by nkojima           #+#    #+#             */
+/*   Updated: 2025/11/10 01:24:35 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#ifndef STACK_H
+# define STACK_H
 
-# include "ft_printf.h"
-# include "libft.h"
+# include <stddef.h>
+# include <stdlib.h>
 
 typedef struct s_node
 {
@@ -28,28 +28,15 @@ typedef struct s_stack
 	int		size;
 }	t_stack;
 
-void	sa(t_stack *a);
-void	sb(t_stack *b);
-void	ss(t_stack *a, t_stack *b);
-
-void	pa(t_stack *a, t_stack *b);
-void	pb(t_stack *a, t_stack *b);
-
-void	ra(t_stack *a);
-void	rb(t_stack *b);
-void	rr(t_stack *a, t_stack *b);
-
-void	rra(t_stack *a);
-void	rrb(t_stack *b);
-void	rrr(t_stack *a, t_stack *b);
-
+/* Stack basic operations */
 t_stack	*init_stack(void);
 void	push_back(t_stack *stack, int value);
 void	free_stack(t_stack *stack);
 
-void	sort_two(t_stack *a);
-void	sort_three(t_stack *a);
-void	sort_four(t_stack *a, t_stack *b);
-void	sort_five(t_stack *a, t_stack *b);
+/* Stack operations (pure functions) */
+void	stack_swap(t_stack *stack);
+void	stack_push(t_stack *dst, t_stack *src);
+void	stack_rotate(t_stack *stack);
+void	stack_reverse_rotate(t_stack *stack);
 
 #endif

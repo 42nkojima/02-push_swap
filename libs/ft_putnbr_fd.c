@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/19 11:12:59 by nkojima           #+#    #+#             */
-/*   Updated: 2025/11/09 13:40:00 by nkojima          ###   ########.fr       */
+/*   Created: 2025/11/10 01:00:47 by nkojima           #+#    #+#             */
+/*   Updated: 2025/11/10 01:00:52 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "interfaces/input/input.h"
-#include "usecases/solver.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+static void	put_unbr_fd(unsigned int uint_num, int fd)
 {
-	t_stacks	*stacks;
+	if (uint_num >= 10)
+		put_unbr_fd(uint_num / 10, fd);
+	ft_putchar_fd((uint_num % 10) + '0', fd);
+}
 
-	stacks = parse_input(ac, av);
-	if (!stacks)
-		return (0);
-	if (!solve_push_swap(stacks))
+void	ft_putnbr_fd(int nb, int fd)
+{
+	unsigned int	uint_num;
+
+	if (nb < 0)
 	{
-		free_stacks(stacks);
-		return (1);
+		ft_putchar_fd('-', fd);
+		uint_num = (unsigned int)-nb;
 	}
-	free_stacks(stacks);
-	return (0);
+	else
+		uint_num = (unsigned int)nb;
+	put_unbr_fd(uint_num, fd);
 }

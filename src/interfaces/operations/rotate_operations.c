@@ -1,39 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   rotate_operations.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/08 00:00:00 by nkojima           #+#    #+#             */
-/*   Updated: 2025/11/08 17:53:00 by nkojima          ###   ########.fr       */
+/*   Created: 2025/11/10 00:00:00 by nkojima           #+#    #+#             */
+/*   Updated: 2025/11/10 01:12:18 by nkojima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "operations.h"
+#include "libft.h"
 
-static void	push(t_stack *dst, t_stack *src)
+void	ra(t_stack *a)
 {
-	t_node	*node;
-
-	if (!src || !src->top)
-		return ;
-	node = src->top;
-	src->top = src->top->next;
-	src->size--;
-	node->next = dst->top;
-	dst->top = node;
-	dst->size++;
+	stack_rotate(a);
+	ft_putstr_fd("ra\n", 1);
 }
 
-void	pa(t_stack *a, t_stack *b)
+void	rb(t_stack *b)
 {
-	push(a, b);
-	ft_putstr_fd("pa\n", 1);
+	stack_rotate(b);
+	ft_putstr_fd("rb\n", 1);
 }
 
-void	pb(t_stack *a, t_stack *b)
+void	rr(t_stack *a, t_stack *b)
 {
-	push(b, a);
-	ft_putstr_fd("pb\n", 1);
+	stack_rotate(a);
+	stack_rotate(b);
+	ft_putstr_fd("rr\n", 1);
 }
