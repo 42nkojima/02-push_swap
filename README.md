@@ -1,5 +1,50 @@
 # push_swap
-## 入力解析
+## アーキテクチャ図
+```mermaid
+graph TB
+    subgraph "Presentation Layer"
+        MAIN[main.c<br/>エントリーポイント]
+    end
+
+    subgraph "Use Cases Layer"
+        SOLVER[Solver<br/>ソートアルゴリズム選択・実行]
+        SMALL[sort_small.c<br/>2-5要素 Sort]
+        LARGE[sort_large.c<br/>Radix Sort]
+    end
+
+    subgraph "Interface Layer"
+        INPUT[Input Module<br/>入力解析]
+        OPS[Operations Module<br/>操作命令<br/>sa/sb/pa/pb/ra/rb...]
+    end
+
+    subgraph "Entities Layer"
+        STACK[Stack Entity<br/>スタック構造・基本操作]
+    end
+
+    MAIN -->|parse| INPUT
+    MAIN -->|solve| SOLVER
+    
+    SOLVER -->|uses| SMALL
+    SOLVER -->|uses| LARGE
+    
+    SMALL -->|calls| OPS
+    LARGE -->|calls| OPS
+    
+    INPUT -->|creates| STACK
+    OPS -->|operates on| STACK
+
+    classDef presentation fill:#ff6b6b,stroke:#c92a2a,color:#fff
+    classDef usecase fill:#4ecdc4,stroke:#0a9396,color:#fff
+    classDef interface fill:#ffd93d,stroke:#f08700,color:#000
+    classDef entity fill:#95e1d3,stroke:#38b000,color:#000
+
+    class MAIN presentation
+    class SOLVER,SMALL,LARGE usecase
+    class INPUT,OPS interface
+    class STACK entity
+```
+
+## 入力解析フロー
 ```mermaid
 flowchart TD
     Start(["main関数開始"]) --> CheckArgc{"argc == 1?<br/><br/>【考慮ケース】<br/>./push_swap"}
