@@ -6,7 +6,7 @@
 #    By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/18 19:32:33 by nkojima           #+#    #+#              #
-#    Updated: 2025/11/10 14:24:30 by nkojima          ###   ########.fr        #
+#    Updated: 2025/11/10 14:28:20 by nkojima          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -111,4 +111,4 @@ re: fclean all
 test:
 	@bash tests/test_input_validation.sh
 
-.PHONY: all clean fclean re test test-input test-sorting
+.PHONY: all clean fclean re test
