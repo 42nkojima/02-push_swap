@@ -6,7 +6,7 @@
 #    By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/18 19:32:33 by nkojima           #+#    #+#              #
-#    Updated: 2025/11/10 03:12:37 by nkojima          ###   ########.fr        #
+#    Updated: 2025/11/10 14:24:30 by nkojima          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ RESET = \033[0m
 #            Settings           #
 # ===============================
 NAME = push_swap
-CFLAGS = -Wall -Werror -Wextra -O2
+CFLAGS = -Wall -Werror -Wextra
 
 # ===============================
 #         Directory Paths       #
@@ -36,7 +36,6 @@ OBJ_DIR = obj
 #         Source Files          #
 # ===============================
 SRCS =  main.c \
-		debug_utils.c \
 		entities/stack.c \
 		entities/stack_operations.c \
 		interfaces/input/input_tokenizer.c \
@@ -109,12 +108,7 @@ re: fclean all
 # ===============================
 #         Test Rules            #
 # ===============================
-test: test-input test-sorting
-
-test-input: $(NAME)
+test:
 	@bash tests/test_input_validation.sh
-
-test-sorting: $(NAME)
-	@bash tests/test_sorting.sh
 
 .PHONY: all clean fclean re test test-input test-sorting
