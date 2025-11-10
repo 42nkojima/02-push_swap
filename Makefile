@@ -6,7 +6,7 @@
 #    By: nkojima <nkojima@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/18 19:32:33 by nkojima           #+#    #+#              #
-#    Updated: 2025/11/10 14:28:20 by nkojima          ###   ########.fr        #
+#    Updated: 2025/11/10 14:43:53 by nkojima          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ CFLAGS = -Wall -Werror -Wextra
 # ===============================
 #         Directory Paths       #
 # ===============================
-LIBS_DIR = libs
+LIB_DIR = lib
 
 SRC_DIR = src
 OBJ_DIR = obj
@@ -56,7 +56,7 @@ OBJ_FILES = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 # ===============================
 #            Libraries          #
 # ===============================
-LIBS_SRCS = ft_isdigit.c \
+LIB_SRCS = ft_isdigit.c \
             ft_memcpy.c \
             ft_putchar_fd.c \
             ft_putnbr_fd.c \
@@ -66,26 +66,26 @@ LIBS_SRCS = ft_isdigit.c \
             ft_strjoin.c \
             ft_strlen.c
 
-LIBS_OBJ_FILES = $(addprefix $(OBJ_DIR)/libs/, $(LIBS_SRCS:.c=.o))
+LIB_OBJ_FILES = $(addprefix $(OBJ_DIR)/$(LIB_DIR)/, $(LIB_SRCS:.c=.o))
 
 # ===============================
 #         Build Rules           #
 # ===============================
 all: $(NAME)
 
-$(NAME): $(OBJ_FILES) $(LIBS_OBJ_FILES)
-	@$(CC) $(CFLAGS) -o $@ $(OBJ_FILES) $(LIBS_OBJ_FILES)
+$(NAME): $(OBJ_FILES) $(LIB_OBJ_FILES)
+	@$(CC) $(CFLAGS) -o $@ $(OBJ_FILES) $(LIB_OBJ_FILES)
 	@echo "$(NAME): $(GREEN)object files were created $(RESET)"
 	@echo "$(NAME): $(YELLOW)$(NAME)$(RESET) $(GREEN)was created$(RESET)"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -I$(SRC_DIR) -I$(LIBS_DIR) -c -o $@ $<
+	@$(CC) $(CFLAGS) -I$(SRC_DIR) -I$(LIB_DIR) -c -o $@ $<
 	@echo "$(NAME): $(YELLOW)$@$(RESET) $(GREEN)was created$(RESET)"
 
-$(OBJ_DIR)/$(LIBS_DIR)/%.o: $(LIBS_DIR)/%.c
+$(OBJ_DIR)/$(LIB_DIR)/%.o: $(LIB_DIR)/%.c
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -I$(LIBS_DIR) -c -o $@ $<
+	@$(CC) $(CFLAGS) -I$(LIB_DIR) -c -o $@ $<
 	@echo "$(NAME): $(YELLOW)$@$(RESET) $(GREEN)was created$(RESET)"
 
 # ===============================
