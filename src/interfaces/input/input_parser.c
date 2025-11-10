@@ -49,7 +49,7 @@ static t_stacks	*process_tokens(char **tokens)
 	if (!numbers)
 	{
 		ft_putstr_fd("Error\n", 2);
-		return (NULL);
+		exit(1);
 	}
 	if (is_sorted(numbers, count))
 	{
@@ -59,7 +59,10 @@ static t_stacks	*process_tokens(char **tokens)
 	stacks = init_stacks(numbers, count);
 	free(numbers);
 	if (!stacks)
+	{
 		ft_putstr_fd("Error\n", 2);
+		exit(1);
+	}
 	return (stacks);
 }
 
